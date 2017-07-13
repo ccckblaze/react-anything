@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -25,7 +25,7 @@ var globalIdCounter = 1;
 
 var createImplementation = function (nativeImplementation) {
 
-    var ReactAnythingComponent = function (element) {
+    var ReactEverythingComponent = function (element) {
         var tag = element.type;
         this._currentElement = element;
         this._tag = tag.toLowerCase();
@@ -38,9 +38,9 @@ var createImplementation = function (nativeImplementation) {
         this._topLevelWrapper = null;
     };
 
-    ReactAnythingComponent.displayName = 'ReactAnythingComponent';
+    ReactEverythingComponent.displayName = 'ReactEverythingComponent';
 
-    ReactAnythingComponent.Mixin = {
+    ReactEverythingComponent.Mixin = {
         mountComponent: function (transaction,
                                   nativeParent,
                                   nativeContainerInfo,
@@ -89,18 +89,18 @@ var createImplementation = function (nativeImplementation) {
         }
     };
 
-    ReactPerf.measureMethods(ReactAnythingComponent.Mixin, 'ReactAnythingComponent', {
+    ReactPerf.measureMethods(ReactEverythingComponent.Mixin, 'ReactEverythingComponent', {
         mountComponent: 'mountComponent',
         receiveComponent: 'receiveComponent',
     });
 
     assign(
-        ReactAnythingComponent.prototype,
-        ReactAnythingComponent.Mixin,
+        ReactEverythingComponent.prototype,
+        ReactEverythingComponent.Mixin,
         ReactMultiChild.Mixin
     );
 
-    return ReactAnythingComponent;
+    return ReactEverythingComponent;
 }
 
 module.exports = createImplementation;

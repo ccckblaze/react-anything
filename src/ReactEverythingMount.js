@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -25,7 +25,7 @@ var instantiateReactComponent = require('react/lib/instantiateReactComponent');
 var invariant = require('fbjs/lib/invariant');
 var warning = require('warning');
 
-var ReactAnythingContainerInfo = require('./ReactAnythingContainerInfo');
+var ReactEverythingContainerInfo = require('./ReactEverythingContainerInfo');
 
 var mountedRootComponents = {};
 var mountedImages = {};
@@ -62,7 +62,7 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
         componentInstance,
         transaction,
         null,
-        ReactAnythingContainerInfo(componentInstance, containerName),
+        ReactEverythingContainerInfo(componentInstance, containerName),
         context
     );
 
@@ -70,7 +70,7 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
         console.timeEnd(markerName);
     }
 
-    ReactAnythingMount._mountImageIntoNode(
+    ReactEverythingMount._mountImageIntoNode(
         markup,
         containerName,
         componentInstance,
@@ -80,7 +80,7 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
 }
 
 
-var ReactAnythingMount = {
+var ReactEverythingMount = {
     render: function (nextElement, containerName, callback) {
         invariant(
             ReactElement.isValidElement(nextElement),
@@ -115,7 +115,7 @@ var ReactAnythingMount = {
             //     var updatedCallback = callback && function () {
             //             callback.call(publicInst);
             //         };
-            //     ReactAnythingMount._updateRootComponent(
+            //     ReactEverythingMount._updateRootComponent(
             //         prevComponent,
             //         nextElement,
             //         containerName,
@@ -123,11 +123,11 @@ var ReactAnythingMount = {
             //     );
             //     return publicInst;
             // } else {
-                ReactAnythingMount._unmountRootComponent(containerName);
+                ReactEverythingMount._unmountRootComponent(containerName);
             // }
         }
 
-        var component = ReactAnythingMount._renderNewRootComponent(nextElement, containerName);
+        var component = ReactEverythingMount._renderNewRootComponent(nextElement, containerName);
 
         if (callback) {
             callback.call(component);
@@ -195,4 +195,4 @@ var ReactAnythingMount = {
     }
 };
 
-module.exports = ReactAnythingMount;
+module.exports = ReactEverythingMount;

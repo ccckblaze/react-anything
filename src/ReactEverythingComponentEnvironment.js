@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -15,7 +15,7 @@
 
 var ReactPerf = require('react/lib/ReactPerf');
 
-var ReactAnythingComponentEnvironment = {
+var ReactEverythingComponentEnvironment = {
     processChildrenUpdates: function (a, b, c) {
     },
     replaceNodeWithMarkup: function (a, b, c) {
@@ -23,11 +23,11 @@ var ReactAnythingComponentEnvironment = {
 };
 
 ReactPerf.measureMethods(
-    ReactAnythingComponentEnvironment,
-    'ReactAnythingComponentEnvironment',
+    ReactEverythingComponentEnvironment,
+    'ReactEverythingComponentEnvironment',
     {
         replaceNodeWithMarkup: 'replaceNodeWithMarkup',
     }
 );
 
-module.exports = ReactAnythingComponentEnvironment;
+module.exports = ReactEverythingComponentEnvironment;

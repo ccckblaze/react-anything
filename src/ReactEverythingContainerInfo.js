@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -8,11 +8,11 @@
  */
 'use strict';
 
-var ReactAnythingContainerInfo = function (rootInstance, containerName) {
+var ReactEverythingContainerInfo = function (rootInstance, containerName) {
     return {
         _rootInstance: rootInstance,
         _containerName: containerName
     };
 };
 
-module.exports = ReactAnythingContainerInfo;
+module.exports = ReactEverythingContainerInfo;

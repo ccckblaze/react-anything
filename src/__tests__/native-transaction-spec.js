@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -13,15 +13,15 @@ jest.autoMockOff();
 
 var createClass = require('./helpers/composite-helper');
 
-describe('ReactAnything transaction management', function () {
+describe('ReactEverything transaction management', function () {
 
     var render, hooks, React;
 
     beforeEach(function () {
-        var ReactAnything = require('./helpers/native-react-anything-test');
-        React = ReactAnything.React;
-        hooks = ReactAnything.hooks;
-        render = ReactAnything.render;
+        var ReactEverything = require('./helpers/native-react-Everything-test');
+        React = ReactEverything.React;
+        hooks = ReactEverything.hooks;
+        render = ReactEverything.render;
     });
 
     it('should render Leaf and empty component', function () {

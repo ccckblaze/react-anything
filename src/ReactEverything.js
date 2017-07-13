@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -11,18 +11,18 @@
 var ReactPerf = require('react/lib/ReactPerf');
 var ReactVersion = require('react/lib/ReactVersion');
 
-var ReactAnythingMount = require('./ReactAnythingMount');
-var ReactAnythingInjection = require('./ReactAnythingInjection');
+var ReactEverythingMount = require('./ReactEverythingMount');
+var ReactEverythingInjection = require('./ReactEverythingInjection');
 
 var warning = require('warning');
 
-var render = ReactPerf.measure('React', 'render', ReactAnythingMount.render);
+var render = ReactPerf.measure('React', 'render', ReactEverythingMount.render);
 
 
-var createReactAnything = function (React, nativeImplementation) {
-    ReactAnythingInjection.inject(nativeImplementation);
+var createReactEverything = function (React, nativeImplementation) {
+    ReactEverythingInjection.inject(nativeImplementation);
 
-    var ReactAnything = {
+    var ReactEverything = {
         React: React,
         render: render,
         version: ReactVersion,
@@ -32,7 +32,7 @@ var createReactAnything = function (React, nativeImplementation) {
         }, {})
     };
 
-    return ReactAnything;
+    return ReactEverything;
 };
 
-module.exports = createReactAnything;
+module.exports = createReactEverything;

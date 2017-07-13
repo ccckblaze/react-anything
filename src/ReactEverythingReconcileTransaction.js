@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -36,7 +36,7 @@ var createTransactionType = function (nativeImplementation) {
         TRANSACTION_WRAPPERS.push(nativeImplementation);
     }
 
-    var ReactAnythingReconcileTransaction = function () {
+    var ReactEverythingReconcileTransaction = function () {
         this.reinitializeTransaction();
         // Only server-side rendering really needs this option (see
         // `ReactServerRendering`), but server-side uses
@@ -71,11 +71,11 @@ var createTransactionType = function (nativeImplementation) {
     };
 
 
-    assign(ReactAnythingReconcileTransaction.prototype, Transaction.Mixin, Mixin);
+    assign(ReactEverythingReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 
-    PooledClass.addPoolingTo(ReactAnythingReconcileTransaction);
+    PooledClass.addPoolingTo(ReactEverythingReconcileTransaction);
 
-    return ReactAnythingReconcileTransaction;
+    return ReactEverythingReconcileTransaction;
 };
 
 module.exports = createTransactionType;

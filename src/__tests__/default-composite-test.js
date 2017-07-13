@@ -1,12 +1,12 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  *
  * 
- * Tests whether ReactAnything manages correctly composite components.
+ * Tests whether ReactEverything manages correctly composite components.
  */
 'use strict';
 
@@ -14,14 +14,14 @@ jest.autoMockOff();
 
 var createClass = require('./helpers/composite-helper');
 
-describe('ReactAnything composite component management', function () {
+describe('ReactEverything composite component management', function () {
 
     var React, render;
 
     beforeEach(function () {
-        var ReactAnything = require('./helpers/default-react-anything-test');
-        React = ReactAnything.React;
-        render = ReactAnything.render;
+        var ReactEverything = require('./helpers/default-react-Everything-test');
+        React = ReactEverything.React;
+        render = ReactEverything.render;
     });
 
     it('should render Leaf and empty component', function () {

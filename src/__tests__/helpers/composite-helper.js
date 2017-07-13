@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -8,7 +8,7 @@
  */
 'use strict';
 
-var React = require('./native-react-anything-test').React;
+var React = require('./native-react-Everything-test').React;
 
 
 var createClass = function (hooksDef) {

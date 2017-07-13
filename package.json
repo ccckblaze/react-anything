@@ -1,13 +1,13 @@
 {
-  "name": "react-anything",
+  "name": "react-everything",
   "version": "0.1.5",
   "description": "Module to create non-DOM implementations of React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/evilfer/react-anything.git"
+    "url": "https://github.com/ccckblaze/react-everything.git"
   },
   "bugs": {
-    "url": "https://github.com/evilfer/react-anything.git/issues"
+    "url": "https://github.com/ccckblaze/react-everything.git/issues"
   },
   "keywords": [
     "React"
@@ -23,7 +23,7 @@
       "/.idea/"
     ]
   },
-  "author": "Eloy Villasclaras <eloy.villasclaras@gmail.com>",
+  "author": "ccckblaze <ccckblaze@sina.com>",
   "license": "BSD",
   "devDependencies": {
     "jest-cli": "0.10.0"

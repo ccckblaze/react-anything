@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -15,7 +15,7 @@ var invariant = require('invariant');
 var warning = require('warning');
 
 
-var ReactAnythingEmptyComponent = function (element) {
+var ReactEverythingEmptyComponent = function (element) {
     this._currentElement = element;
     this._rootNodeID = null;
     this._nativeNode = null;
@@ -25,9 +25,9 @@ var ReactAnythingEmptyComponent = function (element) {
     this._topLevelWrapper = null;
 };
 
-ReactAnythingEmptyComponent.displayName = 'ReactAnythingEmptyComponent';
+ReactEverythingEmptyComponent.displayName = 'ReactEverythingEmptyComponent';
 
-ReactAnythingEmptyComponent.Mixin = {
+ReactEverythingEmptyComponent.Mixin = {
     mountComponent: function (transaction,
                               nativeParent,
                               nativeContainerInfo,
@@ -63,8 +63,8 @@ ReactAnythingEmptyComponent.Mixin = {
 
 
 assign(
-    ReactAnythingEmptyComponent.prototype,
-    ReactAnythingEmptyComponent.Mixin
+    ReactEverythingEmptyComponent.prototype,
+    ReactEverythingEmptyComponent.Mixin
 );
 
-module.exports = ReactAnythingEmptyComponent;
+module.exports = ReactEverythingEmptyComponent;

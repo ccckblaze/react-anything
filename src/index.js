@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -9,13 +9,13 @@
 'use strict';
 
 var React = require('react');
-var ReactAnythingInjection = require('./ReactAnythingInjection');
-var createReactAnything = require('./ReactAnything');
+var ReactEverythingInjection = require('./ReactEverythingInjection');
+var createReactEverything = require('./ReactEverything');
 
-ReactAnythingInjection.clear();
+ReactEverythingInjection.clear();
 
-var createNativeReactAnything = function (nativeImplementation) {
-    return createReactAnything(React, nativeImplementation);
+var createNativeReactEverything = function (nativeImplementation) {
+    return createReactEverything(React, nativeImplementation);
 };
 
-module.exports = createNativeReactAnything;
+module.exports = createNativeReactEverything;

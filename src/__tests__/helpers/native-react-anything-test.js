@@ -1,5 +1,5 @@
 /**
- * Copyright 2016-present, Eloy Villasclaras
+ * Copyright 2016-present, ccckblaze
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -8,10 +8,10 @@
  */
 'use strict';
 
-var createReactAnything = require('../../native');
+var createReactEverything = require('../../native');
 var impl = require('./test-impl');
 
-var ReactTestHelper = createReactAnything(impl);
+var ReactTestHelper = createReactEverything(impl);
 
 module.exports = {
     React: ReactTestHelper.React,
