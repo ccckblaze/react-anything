@@ -110,21 +110,21 @@ var ReactAnythingMount = {
         if (prevComponent) {
             var prevElement = prevComponent._currentElement;
 
-            if (shouldUpdateReactComponent(prevElement, nextElement)) {
-                var publicInst = prevComponent._renderedComponent.getPublicInstance();
-                var updatedCallback = callback && function () {
-                        callback.call(publicInst);
-                    };
-                ReactAnythingMount._updateRootComponent(
-                    prevComponent,
-                    nextElement,
-                    containerName,
-                    updatedCallback
-                );
-                return publicInst;
-            } else {
-                ReactAnythingMount._unmountRootComponent(container);
-            }
+            // if (shouldUpdateReactComponent(prevElement, nextElement)) {
+            //     var publicInst = prevComponent._renderedComponent.getPublicInstance();
+            //     var updatedCallback = callback && function () {
+            //             callback.call(publicInst);
+            //         };
+            //     ReactAnythingMount._updateRootComponent(
+            //         prevComponent,
+            //         nextElement,
+            //         containerName,
+            //         updatedCallback
+            //     );
+            //     return publicInst;
+            // } else {
+                ReactAnythingMount._unmountRootComponent(containerName);
+            // }
         }
 
         var component = ReactAnythingMount._renderNewRootComponent(nextElement, containerName);
@@ -139,6 +139,8 @@ var ReactAnythingMount = {
     },
 
     _unmountRootComponent: function (containerName) {
+        var prevComponent = mountedRootComponents[containerName];
+        prevComponent.unmountComponent();
     },
     
     _renderNewRootComponent: function (nextElement, containerName) {
