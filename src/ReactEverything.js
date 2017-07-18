@@ -11,18 +11,19 @@
 var ReactPerf = require('react/lib/ReactPerf');
 var ReactVersion = require('react/lib/ReactVersion');
 
-var ReactEverythingMount = require('./ReactEverythingMount');
+var createReactEverythingMount = require('./ReactEverythingMount');
 var ReactEverythingInjection = require('./ReactEverythingInjection');
 
 var warning = require('warning');
-
-var render = ReactPerf.measure('React', 'render', ReactEverythingMount.render);
-
+var map = [];
 
 var createReactEverything = function (React, nativeImplementation) {
+    var reactEverythingMount = createReactEverythingMount(nativeImplementation);
+    var render = ReactPerf.measure('React', 'render', reactEverythingMount.render);
     ReactEverythingInjection.inject(nativeImplementation);
 
     var ReactEverything = {
+        impl: nativeImplementation,
         React: React,
         render: render,
         version: ReactVersion,
@@ -32,7 +33,44 @@ var createReactEverything = function (React, nativeImplementation) {
         }, {})
     };
 
+    map.push({react: ReactEverything, mount: reactEverythingMount});
+
     return ReactEverything;
 };
 
-module.exports = createReactEverything;
+var getReactEverythingByMount = function (reactEverythingMount) {
+    for(var key in map){
+        var current = map[key];
+        if(current.mount === reactEverythingMount){
+            return current.react;
+        }
+    }
+    return null;
+}
+
+var getReactEverythingByImpl = function (nativeImplementation) {
+    for(var key in map){
+        var current = map[key];
+        if(current.react.impl === nativeImplementation){
+            return current.react;
+        }
+    }
+    return null;
+}
+
+var getMountByReactEverything = function (reactEverything) {
+    for(var key in map){
+        var current = map[key];
+        if(current.react === reactEverything){
+            return current.mount;
+        }
+    }
+    return null;
+}
+
+module.exports = {
+    createReactEverything,
+    getReactEverythingByMount,
+    getReactEverythingByImpl,
+    getMountByReactEverything
+};

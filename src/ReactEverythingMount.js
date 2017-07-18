@@ -31,7 +31,6 @@ var mountedRootComponents = {};
 var mountedImages = {};
 var __DEV__ = true;
 
-
 function batchedMountComponentIntoNode(componentInstance, containerName, context) {
     var transaction = ReactUpdates.ReactReconcileTransaction.getPooled(false);
     transaction.perform(
@@ -44,7 +43,6 @@ function batchedMountComponentIntoNode(componentInstance, containerName, context
     );
     ReactUpdates.ReactReconcileTransaction.release(transaction);
 }
-
 
 function mountComponentIntoNode(componentInstance, containerName, transaction, context) {
     var markerName;
@@ -70,7 +68,8 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
         console.timeEnd(markerName);
     }
 
-    ReactEverythingMount._mountImageIntoNode(
+    var ReactEverything = require('./ReactEverything');
+    ReactEverything.getMountByReactEverything(context)._mountImageIntoNode(
         markup,
         containerName,
         componentInstance,
@@ -78,121 +77,127 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
         context
     );
 }
+var a = 0;
+var createReactEverythingMount = function() {
+    var ReactEverythingMount = {
+        render: function (nextElement, containerName, callback) {
+            invariant(
+                ReactElement.isValidElement(nextElement),
+                'ReactAnyting.render(): Invalid component element.%s',
+                (
+                    typeof nextElement === 'string' ?
+                        ' Instead of passing a string like \'div\', pass ' +
+                        'React.createElement(\'div\') or <div />.' :
+                        typeof nextElement === 'function' ?
+                            ' Instead of passing a class like Foo, pass ' +
+                            'React.createElement(Foo) or <Foo />.' :
+                            // Check if it quacks like an element
+                            nextElement != null && nextElement.props !== undefined ?
+                                ' This may be caused by unintentionally loading two independent ' +
+                                'copies of React.' :
+                                ''
+                )
+            );
+
+            warning(
+                containerName && typeof containerName === 'string',
+                'render(): containerName must be a string'
+            );
+
+            var prevComponent = mountedRootComponents[containerName];
+
+            if (prevComponent) {
+                var prevElement = prevComponent._currentElement;
+
+                // if (shouldUpdateReactComponent(prevElement, nextElement)) {
+                //     var publicInst = prevComponent._renderedComponent.getPublicInstance();
+                //     var updatedCallback = callback && function () {
+                //             callback.call(publicInst);
+                //         };
+                //     this._updateRootComponent(
+                //         prevComponent,
+                //         nextElement,
+                //         containerName,
+                //         updatedCallback
+                //     );
+                //     return publicInst;
+                // } else {
+                this._unmountRootComponent(containerName);
+                // }
+            }
+
+            var component = ReactEverythingMount._renderNewRootComponent(nextElement, containerName);
+
+            if (callback) {
+                callback.call(component);
+            }
+            return component;
+        },
+
+        _updateRootComponent: function () {
+        },
+
+        _unmountRootComponent: function (containerName) {
+            var prevComponent = mountedRootComponents[containerName];
+            prevComponent.unmountComponent();
+        },
+
+        _renderNewRootComponent: function (nextElement, containerName) {
+            // Various parts of our code (such as ReactCompositeComponent's
+            // _renderValidatedComponent) assume that calls to render aren't nested;
+            // verify that that's the case.
+            warning(
+                ReactCurrentOwner.current == null,
+                '_renderNewRootComponent(): Render methods should be a pure function ' +
+                'of props and state; triggering nested component updates from ' +
+                'render is not allowed. If necessary, trigger nested updates in ' +
+                'componentDidUpdate. Check the render method of %s.',
+                ReactCurrentOwner.current && ReactCurrentOwner.current.getName() ||
+                'ReactCompositeComponent'
+            );
+
+            invariant(
+                containerName && typeof containerName === 'string',
+                '_registerComponent(...): Target containerName is not a string.'
+            );
+
+            var componentInstance = instantiateReactComponent(nextElement);
+
+            // The initial render is synchronous but any updates that happen during
+            // rendering, in componentWillMount or componentDidMount, will be batched
+            // according to the current batching strategy.
+
+            var ReactEverything = require('./ReactEverything')
+
+            ReactUpdates.batchedUpdates(
+                batchedMountComponentIntoNode,
+                componentInstance,
+                containerName,
+                ReactEverything.getReactEverythingByMount(this)
+            );
+
+            mountedRootComponents[containerName] = componentInstance;
+
+            if (__DEV__) {
+                ReactInstrumentation.debugTool.onMountRootComponent(componentInstance);
+            }
+
+            return componentInstance;
+        },
 
 
-var ReactEverythingMount = {
-    render: function (nextElement, containerName, callback) {
-        invariant(
-            ReactElement.isValidElement(nextElement),
-            'ReactAnyting.render(): Invalid component element.%s',
-            (
-                typeof nextElement === 'string' ?
-                ' Instead of passing a string like \'div\', pass ' +
-                'React.createElement(\'div\') or <div />.' :
-                    typeof nextElement === 'function' ?
-                    ' Instead of passing a class like Foo, pass ' +
-                    'React.createElement(Foo) or <Foo />.' :
-                        // Check if it quacks like an element
-                        nextElement != null && nextElement.props !== undefined ?
-                        ' This may be caused by unintentionally loading two independent ' +
-                        'copies of React.' :
-                            ''
-            )
-        );
+        _mountImageIntoNode: function (markup, containerName, image, transaction, context) {
+            invariant(
+                typeof containerName === 'string',
+                'mountComponentIntoNode(...): Target container is not valid.'
+            );
 
-        warning(
-            containerName && typeof containerName === 'string',
-            'render(): containerName must be a string'
-        );
-
-        var prevComponent = mountedRootComponents[containerName];
-
-        if (prevComponent) {
-            var prevElement = prevComponent._currentElement;
-
-            // if (shouldUpdateReactComponent(prevElement, nextElement)) {
-            //     var publicInst = prevComponent._renderedComponent.getPublicInstance();
-            //     var updatedCallback = callback && function () {
-            //             callback.call(publicInst);
-            //         };
-            //     ReactEverythingMount._updateRootComponent(
-            //         prevComponent,
-            //         nextElement,
-            //         containerName,
-            //         updatedCallback
-            //     );
-            //     return publicInst;
-            // } else {
-                ReactEverythingMount._unmountRootComponent(containerName);
-            // }
+            mountedImages[containerName] = image;
         }
+    };
+    ReactEverythingMount.id = a;
+    a++;
+    return ReactEverythingMount
+}
 
-        var component = ReactEverythingMount._renderNewRootComponent(nextElement, containerName);
-
-        if (callback) {
-            callback.call(component);
-        }
-        return component;
-    },
-
-    _updateRootComponent: function () {
-    },
-
-    _unmountRootComponent: function (containerName) {
-        var prevComponent = mountedRootComponents[containerName];
-        prevComponent.unmountComponent();
-    },
-    
-    _renderNewRootComponent: function (nextElement, containerName) {
-        // Various parts of our code (such as ReactCompositeComponent's
-        // _renderValidatedComponent) assume that calls to render aren't nested;
-        // verify that that's the case.
-        warning(
-            ReactCurrentOwner.current == null,
-            '_renderNewRootComponent(): Render methods should be a pure function ' +
-            'of props and state; triggering nested component updates from ' +
-            'render is not allowed. If necessary, trigger nested updates in ' +
-            'componentDidUpdate. Check the render method of %s.',
-            ReactCurrentOwner.current && ReactCurrentOwner.current.getName() ||
-            'ReactCompositeComponent'
-        );
-
-        invariant(
-            containerName && typeof containerName === 'string',
-            '_registerComponent(...): Target containerName is not a string.'
-        );
-
-        var componentInstance = instantiateReactComponent(nextElement);
-
-        // The initial render is synchronous but any updates that happen during
-        // rendering, in componentWillMount or componentDidMount, will be batched
-        // according to the current batching strategy.
-
-        ReactUpdates.batchedUpdates(
-            batchedMountComponentIntoNode,
-            componentInstance,
-            containerName,
-            null
-        );
-
-        mountedRootComponents[containerName] = componentInstance;
-
-        if (__DEV__) {
-            ReactInstrumentation.debugTool.onMountRootComponent(componentInstance);
-        }
-
-        return componentInstance;
-    },
-
-
-    _mountImageIntoNode: function (markup, containerName, image, transaction, context) {
-        invariant(
-            typeof containerName === 'string',
-            'mountComponentIntoNode(...): Target container is not valid.'
-        );
-
-        mountedImages[containerName] = image;
-    }
-};
-
-module.exports = ReactEverythingMount;
+module.exports = createReactEverythingMount;

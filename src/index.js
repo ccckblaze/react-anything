@@ -10,12 +10,12 @@
 
 var React = require('react');
 var ReactEverythingInjection = require('./ReactEverythingInjection');
-var createReactEverything = require('./ReactEverything');
+var ReactEverything = require('./ReactEverything');
 
 ReactEverythingInjection.clear();
 
 var createNativeReactEverything = function (nativeImplementation) {
-    return createReactEverything(React, nativeImplementation);
+    return ReactEverything.createReactEverything(React, nativeImplementation);
 };
 
 module.exports = createNativeReactEverything;

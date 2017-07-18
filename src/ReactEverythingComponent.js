@@ -25,6 +25,13 @@ var globalIdCounter = 1;
 
 var createImplementation = function (nativeImplementation) {
 
+    var getImpl = function(context){
+        if(context && context.impl){
+            return context.impl;
+        }
+        return nativeImplementation;
+    };
+
     var ReactEverythingComponent = function (element) {
         var tag = element.type;
         this._currentElement = element;
@@ -50,8 +57,7 @@ var createImplementation = function (nativeImplementation) {
             this._nativeContainerInfo = nativeContainerInfo;
 
             var props = this._currentElement.props;
-
-            this._nativeNode = nativeImplementation.mount(this._rootNodeID, this._tag, props, nativeParent && nativeParent._nativeNode);
+            this._nativeNode = getImpl(context).mount(this._rootNodeID, this._tag, props, nativeParent && nativeParent._nativeNode);
             var childrenImages = this.mountChildren(props.children, transaction, context);
             if (nativeImplementation.childrenMount && childrenImages.length > 0) {
                 nativeImplementation.childrenMount(this._nativeNode, childrenImages);
@@ -69,7 +75,7 @@ var createImplementation = function (nativeImplementation) {
             var lastProps = prevElement.props;
             var nextProps = this._currentElement.props;
 
-            nativeImplementation.update(this._nativeNode, nextProps, lastProps);
+            getImpl(context).update(this._nativeNode, nextProps, lastProps);
 
             this.updateChildren(nextProps.children, transaction, context);
         },
