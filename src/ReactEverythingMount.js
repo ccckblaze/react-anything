@@ -77,7 +77,7 @@ function mountComponentIntoNode(componentInstance, containerName, transaction, c
         context
     );
 }
-var a = 0;
+
 var createReactEverythingMount = function() {
     var ReactEverythingMount = {
         render: function (nextElement, containerName, callback) {
@@ -114,7 +114,7 @@ var createReactEverythingMount = function() {
                 //     var updatedCallback = callback && function () {
                 //             callback.call(publicInst);
                 //         };
-                //     this._updateRootComponent(
+                //     ReactEverythingMount._updateRootComponent(
                 //         prevComponent,
                 //         nextElement,
                 //         containerName,
@@ -122,7 +122,7 @@ var createReactEverythingMount = function() {
                 //     );
                 //     return publicInst;
                 // } else {
-                this._unmountRootComponent(containerName);
+                ReactEverythingMount._unmountRootComponent(containerName);
                 // }
             }
 
@@ -195,8 +195,6 @@ var createReactEverythingMount = function() {
             mountedImages[containerName] = image;
         }
     };
-    ReactEverythingMount.id = a;
-    a++;
     return ReactEverythingMount
 }
 
