@@ -69,8 +69,8 @@ var getMountByReactEverything = function (reactEverything) {
 }
 
 module.exports = {
-    createReactEverything,
-    getReactEverythingByMount,
-    getReactEverythingByImpl,
-    getMountByReactEverything
+    createReactEverything: createReactEverything,
+    getReactEverythingByMount: getReactEverythingByMount,
+    getReactEverythingByImpl: getReactEverythingByImpl,
+    getMountByReactEverything: getMountByReactEverything
 };

@@ -1,6 +1,6 @@
 {
   "name": "react-everything",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Module to create non-DOM implementations of React",
   "repository": {
     "type": "git",
